@@ -1,13 +1,14 @@
-import type { Config } from "tailwindcss";
+import { Config } from "tailwindcss";
+
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config = {
-  darkMode: ["class", "[data-theme='dark']"],
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./constants/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -20,72 +21,38 @@ const config = {
     },
     extend: {
       colors: {
-        fill: {
-          1: "rgba(255, 255, 255, 0.10)",
-        },
-        bankGradient: "#0179FE",
-        indigo: {
-          500: "#6172F3",
-          700: "#3538CD",
-        },
-        success: {
-          25: "#F6FEF9",
-          50: "#ECFDF3",
-          100: "#D1FADF",
-          600: "#039855",
-          700: "#027A48",
-          900: "#054F31",
-        },
-        pink: {
-          25: "#FEF6FB",
-          100: "#FCE7F6",
-          500: "#EE46BC",
-          600: "#DD2590",
-          700: "#C11574",
-          900: "#851651",
+        green: {
+          500: "#24AE7C",
+          600: "#0D2A1F",
         },
         blue: {
-          25: "#F5FAFF",
-          100: "#D1E9FF",
-          500: "#2E90FA",
-          600: "#1570EF",
-          700: "#175CD3",
-          900: "#194185",
+          500: "#79B5EC",
+          600: "#152432",
         },
-        sky: {
-          1: "#F3F9FF",
+        red: {
+          500: "#F37877",
+          600: "#3E1716",
+          700: "#F24E43",
         },
-        black: {
-          1: "#00214F",
-          2: "#344054",
+        light: {
+          200: "#E8E9E9",
         },
-        gray: {
-          25: "#FCFCFD",
-          200: "#EAECF0",
-          300: "#D0D5DD",
-          500: "#667085",
-          600: "#475467",
-          700: "#344054",
-          900: "#101828",
+        dark: {
+          200: "#0D0F10",
+          300: "#131619",
+          400: "#1A1D21",
+          500: "#363A3D",
+          600: "#76828D",
+          700: "#ABB8C4",
         },
-      },
-      backgroundImage: {
-        "bank-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
-        "gradient-mesh": "url('/icons/gradient-mesh.svg')",
-        "bank-green-gradient":
-          "linear-gradient(90deg, #01797A 0%, #489399 100%)",
-      },
-      boxShadow: {
-        form: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-        chart:
-          "0px 1px 3px 0px rgba(16, 24, 40, 0.10), 0px 1px 2px 0px rgba(16, 24, 40, 0.06)",
-        profile:
-          "0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)",
-        creditCard: "8px 10px 16px 0px rgba(0, 0, 0, 0.05)",
       },
       fontFamily: {
-        inter: "var(--font-inter)",
-        "ibm-plex-serif": "var(--font-ibm-plex-serif)",
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+      backgroundImage: {
+        appointments: "url('/assets/images/appointments-bg.png')",
+        pending: "url('/assets/images/pending-bg.png')",
+        cancelled: "url('/assets/images/cancelled-bg.png')",
       },
       keyframes: {
         "accordion-down": {
@@ -96,10 +63,15 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "caret-blink": {
+          "0%,70%,100%": { opacity: "1" },
+          "20%,50%": { opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
       },
     },
   },
