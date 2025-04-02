@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
@@ -23,6 +23,8 @@ const SideBar = ({ user }: SideBarProps) => {
           />
         </Link>
         {sidebarLinks.map((link) => {
+          const isActive =
+            pathName === link.route || pathName.startsWith(`${link.route}/`);
           return (
             <Link
               href={link.route}
@@ -31,7 +33,19 @@ const SideBar = ({ user }: SideBarProps) => {
                 "bg-bank-gradient": pathName === link.route,
               })}
             >
-              {link.label}
+              <div className="relative size-6">
+                <Image
+                  src={link.imgURL}
+                  alt={link.label}
+                  fill
+                  className={cn({
+                    "brightness-[3] invert-0": isActive,
+                  })}
+                />
+              </div>
+              <p className={cn(`sidebar-label`, { "!text-white": isActive })}>
+                {link.label}
+              </p>
             </Link>
           );
         })}
