@@ -1,11 +1,9 @@
-'use client';
+"use client";
 import React from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -28,43 +26,53 @@ const MobileNav = ({ user }: MobileNavProps) => {
             className="cursor-pointer"
           />
         </SheetTrigger>
-        <SheetContent side="left">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/icons/logo.svg"
-              alt="Logo"
-              width={50}
-              height={50}
-              className="size-[50px] xl:size-[100px]"
-            />
+        <SheetContent side="left" className="bg-white border-none">
+          <Link href="/" className="flex items-center gap-1 px-4">
+            <Image src="/icons/logo.svg" alt="Logo" width={50} height={50} />
+            <h1 className="ml-2 text-26 font-ibm-plex-serif font-bold text-black-1">
+              Panel
+            </h1>
           </Link>
-          {sidebarLinks.map((link) => {
-            const isActive =
-              pathName === link.route || pathName.startsWith(`${link.route}/`);
-            return (
-              <Link
-                href={link.route}
-                key={link.label}
-                className={cn(`sidebar-link`, {
-                  "bg-bank-gradient": pathName === link.route,
+          <div className="mobilenav-sheet">
+            <SheetClose asChild>
+              <nav className="flex h-full flex-col gap-6 pt-16 text-white">
+                {sidebarLinks.map((link) => {
+                  const isActive =
+                    pathName === link.route ||
+                    pathName.startsWith(`${link.route}/`);
+                  return (
+                    <SheetClose asChild key={link.route}>
+                      <Link
+                        href={link.route}
+                        key={link.label}
+                        className={cn(`sidebar-link`, {
+                          "bg-bank-gradient": pathName === link.route,
+                        })}
+                      >
+                        <div className="relative size-6">
+                          <Image
+                            src={link.imgURL}
+                            alt={link.label}
+                            fill
+                            className={cn({
+                              "brightness-[3] invert-0": isActive,
+                            })}
+                          />
+                        </div>
+                        <p
+                          className={cn(`sidebar-label`, {
+                            "!text-white": isActive,
+                          })}
+                        >
+                          {link.label}
+                        </p>
+                      </Link>
+                    </SheetClose>
+                  );
                 })}
-              >
-                <div className="relative size-6">
-                  <Image
-                    src={link.imgURL}
-                    alt={link.label}
-                    fill
-                    className={cn({
-                      "brightness-[3] invert-0": isActive,
-                    })}
-                  />
-                </div>
-                <p className={cn(`sidebar-label`, { "!text-white": isActive })}>
-                  {link.label}
-                </p>
-              </Link>
-            );
-          })}
+              </nav>
+            </SheetClose>
+          </div>
         </SheetContent>
       </Sheet>
     </section>
