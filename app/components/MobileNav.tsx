@@ -12,6 +12,13 @@ import { sidebarLinks } from "@/constants";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
+interface MobileNavProps {
+  user:{
+    firstName: string;
+    lastName: string;
+  }
+}
+
 const MobileNav = ({ user }: MobileNavProps) => {
   const pathName = usePathname();
   return (
