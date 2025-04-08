@@ -13,10 +13,10 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 interface MobileNavProps {
-  user:{
+  user: {
     firstName: string;
     lastName: string;
-  }
+  };
 }
 
 const MobileNav = ({ user }: MobileNavProps) => {
@@ -34,7 +34,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
           />
         </SheetTrigger>
         <SheetContent side="left" className="bg-white border-none">
-          <Link href="/" className="flex items-center gap-1 px-4">
+          <Link href="/" className="cursor-pointer flex items-center gap-1 px-4">
             <Image src="/icons/logo.svg" alt="Logo" width={50} height={50} />
             <h1 className="ml-2 text-26 font-ibm-plex-serif font-bold text-black-1">
               Panel
@@ -56,15 +56,15 @@ const MobileNav = ({ user }: MobileNavProps) => {
                           "bg-bank-gradient": pathName === link.route,
                         })}
                       >
-                          <Image
-                            src={link.imgURL}
-                            alt={link.label}
-                            width={20}
-                            height={20}
-                            className={cn({
-                              "brightness-[3] invert-0": isActive,
-                            })}
-                          />
+                        <Image
+                          src={link.imgURL}
+                          alt={link.label}
+                          width={20}
+                          height={20}
+                          className={cn({
+                            "brightness-[3] invert-0": isActive,
+                          })}
+                        />
                         <p
                           className={cn(`text-16 font-semibold text-black-2`, {
                             "!text-white": isActive,
