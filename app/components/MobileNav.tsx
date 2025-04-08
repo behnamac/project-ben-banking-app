@@ -5,7 +5,7 @@ import {
   SheetClose,
   SheetContent,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/app/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
 import { sidebarLinks } from "@/constants";
