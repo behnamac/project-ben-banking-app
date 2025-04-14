@@ -58,9 +58,54 @@ const AuthForm = ({ type }: AuthFormProps) => {
         <div className="flex flex-col gap-4">{/* PlaidLink */}</div>
       ) : (
         <>
-          {" "}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {type === "sign-up" && (
+                <>
+                  <CustomInput
+                    name="firstName"
+                    label="First Name"
+                    placeholder="Enter your first name"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="lastName"
+                    label="Last Name"
+                    placeholder="Enter your last name"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="address"
+                    label="Address"
+                    placeholder="Enter your specific address"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="state"
+                    label="State"
+                    placeholder="Example: NY"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="postalCode"
+                    label="Postal Code"
+                    placeholder="Example: 10001"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="dateOfBirth"
+                    label="Date of Birth"
+                    placeholder="YYYY-MM-DD"
+                    control={form.control}
+                  />
+                   <CustomInput
+                    name="ssn"
+                    label="Social Security Number"
+                    placeholder="Example: 123-45-6789"
+                    control={form.control}
+                  />
+                </>
+              )}
               <CustomInput
                 name="email"
                 label="Email"

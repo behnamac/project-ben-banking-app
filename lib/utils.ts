@@ -195,8 +195,23 @@ export const getTransactionStatus = (date: Date) => {
   return date > twoDaysAgo ? "Processing" : "Success";
 };
 
-
 export const authFormSchema = z.object({
+  // sign-up
+  firstName: z.string().min(2, "First name must be at least 2 characters long"),
+  lastName: z.string().min(2, "First name must be at least 2 characters long"),
+  address: z
+    .string()
+    .min(2, "First name must be at least 2 characters long")
+    .max(50),
+  state: z.string().min(2, "First name must be at least 2 characters long").max(2),
+  postalCode: z
+    .string()
+    .min(2, "First name must be at least 2 characters long").max(6),
+  dateOfBirth: z
+    .string()
+    .min(2, "First name must be at least 2 characters long"),
+  ssn: z.string().min(2, "First name must be at least 2 characters long"),
+  // both sign-up and sign-in
   email: z.string().email(),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });
