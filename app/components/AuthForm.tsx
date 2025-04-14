@@ -6,19 +6,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
-
+import { Loader2 } from "lucide-react";
 
 interface AuthFormProps {
   type: "sign-in" | "sign-up";
@@ -26,7 +17,7 @@ interface AuthFormProps {
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const [user, setUser] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof authFormSchema>>({
     resolver: zodResolver(authFormSchema),
     defaultValues: {
@@ -38,7 +29,9 @@ const AuthForm = ({ type }: AuthFormProps) => {
   function onSubmit(values: z.infer<typeof authFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    setIsLoading(true);
     console.log(values);
+    setIsLoading(false);
   }
 
   return (
@@ -81,7 +74,16 @@ const AuthForm = ({ type }: AuthFormProps) => {
                 placeholder="Enter your password"
                 control={form.control}
               />
-              <Button type="submit">Submit</Button>
+              <Button type="submit" className="form-btn" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="animate-spin" size={20} />
+                    &nbsp;Loading...
+                  </>
+                ) : (
+                  <>{type === "sign-in" ? "Sign In" : "Sign Up"}</>
+                )}
+              </Button>
             </form>
           </Form>
         </>
