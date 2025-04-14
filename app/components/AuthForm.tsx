@@ -16,9 +16,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import CustomInput from "./CustomInput";
+import { formSchema } from "@/lib/utils";
 
-const formSchema = z.object({
-  email: z.string().email()});
 
 interface AuthFormProps {
   type: "sign-in" | "sign-up";
@@ -67,24 +67,18 @@ const AuthForm = ({ type }: AuthFormProps) => {
           {" "}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
+              <CustomInput
                 name="email"
-                render={({ field }) => (
-                  <div className="form-item">
-                    <FormLabel>Email</FormLabel>
-                    <div className="flex w-full flex-col">
-                      <FormControl>
-                        <Input
-                          placeholder="Enter your email"
-                          className="input-class"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-red-500" />
-                    </div>
-                  </div>
-                )}
+                label="Email"
+                placeholder="Enter your email"
+                control={form.control}
+              />
+
+              <CustomInput
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                control={form.control}
               />
               <Button type="submit">Submit</Button>
             </form>
