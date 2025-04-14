@@ -196,7 +196,7 @@ export const getTransactionStatus = (date: Date) => {
 };
 
 
-export const formSchema = z.object({
+export const authFormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8, "Password must be at least 8 characters long"),
 });

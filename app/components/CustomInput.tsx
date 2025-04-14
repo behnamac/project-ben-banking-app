@@ -6,13 +6,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { Control } from "react-hook-form";
+import { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
-import { formSchema } from "@/lib/utils";
+import { authFormSchema } from "@/lib/utils";
 
 interface CustomInputProps {
-  control: Control<z.infer<typeof formSchema>>;
-  name: string;
+  control: Control<z.infer<typeof authFormSchema>>;
+  name: FieldPath<z.infer<typeof authFormSchema>>;
   placeholder: string;
   label: string;
 }

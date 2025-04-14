@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import CustomInput from "./CustomInput";
-import { formSchema } from "@/lib/utils";
+import { authFormSchema } from "@/lib/utils";
 
 
 interface AuthFormProps {
@@ -27,14 +27,15 @@ interface AuthFormProps {
 const AuthForm = ({ type }: AuthFormProps) => {
   const [user, setUser] = useState(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof authFormSchema>>({
+    resolver: zodResolver(authFormSchema),
     defaultValues: {
       email: "",
+      password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof authFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
@@ -70,7 +71,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
               <CustomInput
                 name="email"
                 label="Email"
-                placeholder="Enter your email"
+                placeholder="Enter your username or email"
                 control={form.control}
               />
 
