@@ -18,15 +18,17 @@ interface AuthFormProps {
 const AuthForm = ({ type }: AuthFormProps) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<z.infer<typeof authFormSchema>>({
-    resolver: zodResolver(authFormSchema),
+  const formSchema = authFormSchema(type);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof authFormSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     setIsLoading(true);
@@ -62,18 +64,20 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               {type === "sign-up" && (
                 <>
-                  <CustomInput
-                    name="firstName"
-                    label="First Name"
-                    placeholder="Enter your first name"
-                    control={form.control}
-                  />
-                  <CustomInput
-                    name="lastName"
-                    label="Last Name"
-                    placeholder="Enter your last name"
-                    control={form.control}
-                  />
+                  <div className="flex gap-4 ">
+                    <CustomInput
+                      name="firstName"
+                      label="First Name"
+                      placeholder="Enter your first name"
+                      control={form.control}
+                    />
+                    <CustomInput
+                      name="lastName"
+                      label="Last Name"
+                      placeholder="Enter your last name"
+                      control={form.control}
+                    />
+                  </div>
                   <CustomInput
                     name="address"
                     label="Address"
@@ -98,7 +102,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     placeholder="YYYY-MM-DD"
                     control={form.control}
                   />
-                   <CustomInput
+                  <CustomInput
                     name="ssn"
                     label="Social Security Number"
                     placeholder="Example: 123-45-6789"
