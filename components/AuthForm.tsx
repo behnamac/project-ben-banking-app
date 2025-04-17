@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
-import { z } from "zod";
+import { date, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Form } from "@/components/ui/form";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { signUp, signIn } from "@/lib/actions/user.actions";
 
 interface AuthFormProps {
   type: "sign-in" | "sign-up";
@@ -28,13 +29,26 @@ const AuthForm = ({ type }: AuthFormProps) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      if (type === "sign-up") {
+        const newUser = await signUp(date);
+        setUser(newUser);
+      }
+      if (type === "sign-in") {
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
     setIsLoading(true);
-    console.log(values);
+
     setIsLoading(false);
-  }
+  };
 
   return (
     <section className="auth-form">
