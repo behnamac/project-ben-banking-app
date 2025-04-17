@@ -28,32 +28,13 @@ const AuthForm = ({ type }: AuthFormProps) => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
     setIsLoading(true);
-    try {
-      // Simulate an API call
-      if (type === "sign-up") {
-        // Simulate sign-in API call
-        console.log("Sign in data:", data);
-        // const newUser=await singUp(data);
-        // setUser(newUser);
-      }
-      if (type === "sign-in") {
-        // Simulate sign-up API call
-        console.log("Sign up data:", data);
-        // const response=await signIn({
-        //   email: data.email,
-        //   password: data.password,
-        // })
-        // if (response) router.push('/');
-      }
-
-    } catch (error) {
-    } finally {
-      setIsLoading(false);
-    }
+    console.log(values);
     setIsLoading(false);
-  };
+  }
 
   return (
     <section className="auth-form">
@@ -104,39 +85,29 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     control={form.control}
                   />
                   <CustomInput
-                    name="city"
-                    label="City"
-                    placeholder="Enter your city"
+                    name="state"
+                    label="State"
+                    placeholder="Example: NY"
                     control={form.control}
                   />
-                  <div className="flex gap-4 ">
-                    <CustomInput
-                      name="state"
-                      label="State"
-                      placeholder="Example: NY"
-                      control={form.control}
-                    />
-                    <CustomInput
-                      name="postalCode"
-                      label="Postal Code"
-                      placeholder="Example: 10001"
-                      control={form.control}
-                    />
-                  </div>
-                  <div className="flex gap-4 ">
-                    <CustomInput
-                      name="dateOfBirth"
-                      label="Date of Birth"
-                      placeholder="YYYY-MM-DD"
-                      control={form.control}
-                    />
-                    <CustomInput
-                      name="ssn"
-                      label="Social Security Number"
-                      placeholder="Example: 123-45-6789"
-                      control={form.control}
-                    />
-                  </div>
+                  <CustomInput
+                    name="postalCode"
+                    label="Postal Code"
+                    placeholder="Example: 10001"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="dateOfBirth"
+                    label="Date of Birth"
+                    placeholder="YYYY-MM-DD"
+                    control={form.control}
+                  />
+                  <CustomInput
+                    name="ssn"
+                    label="Social Security Number"
+                    placeholder="Example: 123-45-6789"
+                    control={form.control}
+                  />
                 </>
               )}
               <CustomInput
