@@ -32,7 +32,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       if (type === "sign-up") {
-        const newUser = await signUp(date);
+        const newUser = await signUp(data);
         setUser(newUser);
       }
       if (type === "sign-in") {
