@@ -13,27 +13,37 @@ export const signIn = async () => {
 };
 
 export const signUp = async (userData: SignUpParams) => {
+  const { firstName, lastName, email, password } = userData;
   try {
+    console.log("Creating admin client...");
     const { account } = await createAdminClient();
-    const { firstName, lastName, email, password } = userData;
+
+    console.log("Creating user account...");
     const newUserAccount = await account.create(
       ID.unique(),
       email,
       password,
       `${firstName} ${lastName}`
     );
+    console.log("New user account created:", newUserAccount);
 
+    console.log("Creating email/password session...");
     const session = await account.createEmailPasswordSession(email, password);
+    console.log("Session created:", session);
 
-    (await cookies()).set("appwtite-session", session.secret, {
+    console.log("Setting session cookie...");
+    (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
       sameSite: "strict",
       secure: true,
     });
+    
+
     return parseStringify(newUserAccount);
   } catch (error) {
-    console.log(error);
+    console.error("Error during sign-up:", error);
+    throw error; // Re-throw the error to handle it in the calling function
   }
 };
 
@@ -44,6 +54,7 @@ export async function getLoggedInUser() {
     const { account } = await createSessionClient();
     return await account.get();
   } catch (error) {
+    console.log(error);
     return null;
   }
 }

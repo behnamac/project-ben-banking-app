@@ -39,6 +39,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+
     try {
       if (type === "sign-up") {
         const newUser = await signUp(data);
@@ -54,7 +56,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
       console.error("Error:", error);
     }
 
-    setIsLoading(true);
 
     setIsLoading(false);
   };
