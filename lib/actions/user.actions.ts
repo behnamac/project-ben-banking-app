@@ -3,7 +3,6 @@
 import { ID } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
-import { parseStaticPathsResult } from "next/dist/lib/fallback";
 import { parseStringify } from "../utils";
 
 export const signIn = async () => {

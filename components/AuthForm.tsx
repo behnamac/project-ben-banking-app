@@ -26,6 +26,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
     defaultValues: {
       email: "",
       password: "",
+      ...(type === "sign-up" && {
+        firstName: "",
+        lastName: "",
+        address: "",
+        state: "",
+        postalCode: "",
+        dateOfBirth: "",
+        ssn: "",
+      }),
     },
   });
 
@@ -36,10 +45,10 @@ const AuthForm = ({ type }: AuthFormProps) => {
         setUser(newUser);
       }
       if (type === "sign-in") {
-        const response = await signIn({
-          email: data.email,
-          password: data.password,
-        });
+        // const response = await signIn({
+        //   email: data.email,
+        //   password: data.password,
+        // });
       }
     } catch (error) {
       console.error("Error:", error);
