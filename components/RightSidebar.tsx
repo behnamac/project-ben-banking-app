@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import BankCard from "@/app/components/BankCard";
+import BankCard from "@/components/BankCard";
 
 interface RightSidebarProps {
   user: { firstName: string; lastName: string; email: string };
