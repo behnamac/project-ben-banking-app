@@ -8,7 +8,7 @@ import { parseStringify } from "../utils";
 export const signIn = async () => {
   try {
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
