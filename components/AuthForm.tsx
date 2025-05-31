@@ -108,6 +108,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     placeholder="Enter your specific address"
                     control={form.control}
                   />
+                   <CustomInput
+                    name="city"
+                    label="City"
+                    placeholder="Enter your specific city"
+                    control={form.control}
+                  />
                   <CustomInput
                     name="state"
                     label="State"
