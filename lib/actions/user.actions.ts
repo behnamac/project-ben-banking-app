@@ -15,23 +15,23 @@ export const signIn = async () => {
 export const signUp = async (userData: SignUpParams) => {
   const { firstName, lastName, email, password } = userData;
   try {
-    console.log("Creating admin client...");
+    //console.log("Creating admin client...");
     const { account } = await createAdminClient();
 
-    console.log("Creating user account...");
+    //console.log("Creating user account...");
     const newUserAccount = await account.create(
       ID.unique(),
       email,
       password,
       `${firstName} ${lastName}`
     );
-    console.log("New user account created:", newUserAccount);
+    //console.log("New user account created:", newUserAccount);
 
-    console.log("Creating email/password session...");
+    //console.log("Creating email/password session...");
     const session = await account.createEmailPasswordSession(email, password);
-    console.log("Session created:", session);
+    //console.log("Session created:", session);
 
-    console.log("Setting session cookie...");
+    //console.log("Setting session cookie...");
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,

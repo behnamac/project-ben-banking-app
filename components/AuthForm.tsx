@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { signUp, signIn } from "@/lib/actions/user.actions";
+import { signUp, signIn, getLoggedInUser } from "@/lib/actions/user.actions";
 
 interface AuthFormProps {
   type: "sign-in" | "sign-up";
